@@ -1,0 +1,6 @@
+.whisper/
+node_modules/
+out/
+.DS_Store
+public/videos/**/raw/
+.venv/
