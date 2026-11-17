@@ -349,3 +349,84 @@ export const PlumEndCard: React.FC<{ durationInFrames: number; line: string; han
     </Stage>
   );
 };
+
+/** Words flowing down into each other: footage ↓ prompt ↓ video. (the last one in serif). */
+export const MomentFlow: React.FC<{ durationInFrames: number; words: string[] }> = ({ durationInFrames, words }) => {
+  const s = useS();
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  return (
+    <Stage durationInFrames={durationInFrames}>
+      <div style={{ position: "absolute", top: "38%", left: 0, right: 0, textAlign: "center" }}>
+        {words.map((w, i) => {
+          const at = 0.3 + i * 0.6;
+          const p = interpolate(frame, [at * fps, (at + 0.6) * fps], [0, 1], { ...clamp, easing: EASE });
+          const last = i === words.length - 1;
+          const active = interpolate(frame, [(at + 0.6) * fps, (at + 0.9) * fps], [1, 0.45], clamp);
+          return (
+            <div key={i} style={{ opacity: p }}>
+              {i > 0 ? (
+                <div style={{ fontFamily: fonts.mono, fontSize: 40 * s, color: purple.violet, lineHeight: 1.4 }}>↓</div>
+              ) : null}
+              <div
+                style={{
+                  fontFamily: last ? fonts.serif : fonts.mono,
+                  fontStyle: last ? "italic" : "normal",
+                  fontSize: (last ? 110 : 58) * s,
+                  color: last ? purple.white : purple.lilac,
+                  opacity: last ? 1 : active,
+                  transform: `translateY(${(1 - p) * -30 * s}px)`,
+                  lineHeight: 1.2,
+                }}
+              >
+                {w}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Stage>
+  );
+};
+
+/** End card: serif kicker + big mono word with a blinking violet cursor + small line. */
+export const CtaEndCard: React.FC<{ durationInFrames: number; kicker: string; word: string; sub?: string }> = ({
+  durationInFrames,
+  kicker,
+  word,
+  sub,
+}) => {
+  const s = useS();
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const p = useProgress(0.2, 0.7);
+  const typed = Math.max(0, Math.min(word.length, Math.floor((frame - 0.7 * fps) / (0.08 * fps))));
+  const blink = Math.floor(frame / (0.5 * fps)) % 2 === 0;
+  const subP = useProgress(1.3, 0.6);
+  return (
+    <Stage durationInFrames={durationInFrames} tag="END">
+      <div style={{ position: "absolute", top: "38%", left: 0, right: 0, textAlign: "center", opacity: p }}>
+        <div style={{ fontFamily: fonts.serif, fontStyle: "italic", fontSize: 120 * s, color: purple.white, lineHeight: 1.1 }}>{kicker}</div>
+        <div style={{ fontFamily: fonts.mono, fontSize: 120 * s, color: purple.white, marginTop: 10 * s }}>
+          {word.slice(0, typed)}
+          <span
+            style={{
+              display: "inline-block",
+              width: 12 * s,
+              height: 120 * s,
+              marginLeft: 10 * s,
+              verticalAlign: "middle",
+              background: purple.violet,
+              opacity: blink ? 1 : 0,
+            }}
+          />
+        </div>
+        {sub ? (
+          <div style={{ fontFamily: fonts.display, fontWeight: 500, fontSize: 36 * s, color: purple.muted, marginTop: 30 * s, opacity: subP }}>
+            {sub}
+          </div>
+        ) : null}
+      </div>
+    </Stage>
+  );
+};

@@ -18,6 +18,10 @@ export const Footage: React.FC<{ spec: EditSpec }> = ({ spec }) => {
   let eased = 1;
   for (const p of pushIns) {
     if (p.atMs > nowMs) break;
+    if (p.atMs === 0) {
+      eased = p.scale; // the opening scale applies from frame 0
+      continue;
+    }
     eased = interpolate(nowMs, [p.atMs, p.atMs + 3000], [eased, p.scale], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -39,6 +43,8 @@ export const Footage: React.FC<{ spec: EditSpec }> = ({ spec }) => {
     height: "100%",
     objectFit: "cover",
     scale: String(scale),
+    // Purple Room: zoom from the bottom edge, so push-ins lift the face (more room under the chin) instead of lowering it
+    transformOrigin: purple ? "50% 100%" : undefined,
     filter: `grayscale(${mono}) contrast(${1.05 + mono * 0.1}) saturate(${1.08 - mono})`,
   };
 

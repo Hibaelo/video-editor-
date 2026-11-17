@@ -106,9 +106,24 @@ export type PurpleOverlay =
   | (Timed & { type: "momentCounter"; steps: number[]; value: string; unit: string; kicker?: string })
   | (Timed & { type: "momentSlider"; label: string; kicker?: string; percent?: number })
   | (Timed & { type: "momentCode"; code: string; sub?: string; file?: string })
-  | (Timed & { type: "endCard"; line: string; handle: string });
+  | (Timed & { type: "endCard"; line: string; handle: string })
+  | (Timed & { type: "fileStack"; lines: string[]; every?: number; y?: number })
+  | (Timed & { type: "progressCard"; label: string; from: number; to: number; y?: number })
+  | (Timed & { type: "creditRows"; rows: string[]; who: string; every?: number; y?: number })
+  | (Timed & { type: "momentFlow"; words: string[] })
+  | (Timed & { type: "ctaEndCard"; kicker: string; word: string; sub?: string })
+  /** Full-frame muted footage clip (e.g. a pre-reversed "rewind" piece of the edit). Hidden in QA renders. */
+  | (Timed & { type: "clip"; src: string });
 
-export const FULL_SCREEN_TYPES = ["momentBlocks", "momentCounter", "momentSlider", "momentCode", "endCard"] as const;
+export const FULL_SCREEN_TYPES = [
+  "momentBlocks",
+  "momentCounter",
+  "momentSlider",
+  "momentCode",
+  "momentFlow",
+  "endCard",
+  "ctaEndCard",
+] as const;
 
 export type EditSpec = {
   /** "purple" = Purple Room style (Alexandria captions + violet pill, soft push-ins, no cyan grade). */

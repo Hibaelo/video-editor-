@@ -92,7 +92,9 @@ export const PurpleCaptions: React.FC<{
   const endMs = Math.min(page[page.length - 1].endMs + 300, next ? next[0].startMs : Infinity);
   const enter = interpolate(nowMs, [startMs, startMs + 250], [0, 1], { ...clamp, easing: EASE });
   const exit = interpolate(nowMs, [endMs - 150, endMs], [1, 0], { ...clamp, easing: EASE });
-  const inMoment = momentRanges.some((r) => page[0].startMs < r.endMs && page[page.length - 1].endMs > r.startMs);
+  // Top position ONLY while a full-screen moment is actually on screen (the face is hidden then).
+  // A page that straddles a moment edge stays under the chin outside the moment, and is hidden while it switches.
+  const inMoment = momentRanges.some((r) => nowMs >= r.startMs && nowMs < r.endMs);
   const rtl = page.some((w) => isAr(w.text));
 
   return (

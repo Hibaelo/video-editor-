@@ -3,12 +3,16 @@ import { FULL_SCREEN_TYPES, type Overlay, type PurpleOverlay } from "../../brand
 import { clampTop } from "../../brand/layout";
 import { ChapterChip, CommentCard, GapBars, PinnedReply } from "./Cards";
 import { BWStrike, ChapterBlur } from "./FootageFx";
-import { MomentBlocks, MomentCode, MomentCounter, MomentSlider, PlumEndCard } from "./Moments";
+import { CtaEndCard, MomentBlocks, MomentCode, MomentCounter, MomentFlow, MomentSlider, PlumEndCard } from "./Moments";
+import { CreditRows, FileStack, ProgressCard } from "./Cards2";
+import { AbsoluteFill, staticFile } from "remotion";
+import { Video } from "@remotion/media";
 
 export { PurpleCaptions } from "./PurpleCaptions";
 export { FrostedCard } from "./FrostedCard";
 export { CommentCard, ChapterChip, GapBars, PinnedReply, ChapterBlur, BWStrike };
-export { MomentBlocks, MomentCounter, MomentSlider, MomentCode, PlumEndCard };
+export { MomentBlocks, MomentCounter, MomentSlider, MomentCode, MomentFlow, PlumEndCard, CtaEndCard };
+export { FileStack, ProgressCard, CreditRows };
 
 const PURPLE_TYPES = new Set<string>([
   "comment",
@@ -17,6 +21,10 @@ const PURPLE_TYPES = new Set<string>([
   "pinnedReply",
   "chapterBlur",
   "bwStrike",
+  "fileStack",
+  "progressCard",
+  "creditRows",
+  "clip",
   ...FULL_SCREEN_TYPES,
 ]);
 
@@ -24,7 +32,7 @@ export const isPurpleOverlay = (o: Overlay | PurpleOverlay): o is PurpleOverlay 
 export const isFullScreen = (o: Overlay | PurpleOverlay) => (FULL_SCREEN_TYPES as readonly string[]).includes(o.type);
 
 /** Footage effects sit under captions and cards. */
-export const isFootageFx = (o: Overlay | PurpleOverlay) => o.type === "chapterBlur" || o.type === "bwStrike";
+export const isFootageFx = (o: Overlay | PurpleOverlay) => o.type === "chapterBlur" || o.type === "bwStrike" || o.type === "clip";
 
 /**
  * Renders one Purple Room overlay inside its <Sequence> (frame 0 = overlay start).
@@ -46,8 +54,8 @@ export const PurpleOverlayLayer: React.FC<{
     case "pinnedReply":
       return <PinnedReply top={clampTop(o.y, minTop)} durationInFrames={d} comment={o.comment} reply={o.reply} />;
     case "chapterBlur":
-      // the big serif number takes the caption band's place, under the chin
-      return <ChapterBlur top={captionTop} durationInFrames={d} number={o.number} label={o.label} />;
+      // the serif number sits under the captions (captions keep their band)
+      return <ChapterBlur top={minTop} durationInFrames={d} number={o.number} label={o.label} />;
     case "bwStrike":
       return (
         <BWStrike
@@ -67,5 +75,21 @@ export const PurpleOverlayLayer: React.FC<{
       return <MomentCode durationInFrames={d} code={o.code} sub={o.sub} file={o.file} />;
     case "endCard":
       return <PlumEndCard durationInFrames={d} line={o.line} handle={o.handle} />;
+    case "fileStack":
+      return <FileStack top={clampTop(o.y, minTop)} durationInFrames={d} lines={o.lines} every={o.every} />;
+    case "progressCard":
+      return <ProgressCard top={clampTop(o.y, minTop)} durationInFrames={d} label={o.label} from={o.from} to={o.to} />;
+    case "creditRows":
+      return <CreditRows top={clampTop(o.y, minTop)} durationInFrames={d} rows={o.rows} who={o.who} every={o.every} />;
+    case "momentFlow":
+      return <MomentFlow durationInFrames={d} words={o.words} />;
+    case "ctaEndCard":
+      return <CtaEndCard durationInFrames={d} kicker={o.kicker} word={o.word} sub={o.sub} />;
+    case "clip":
+      return (
+        <AbsoluteFill>
+          <Video src={staticFile(o.src)} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        </AbsoluteFill>
+      );
   }
 };

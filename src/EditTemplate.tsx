@@ -30,7 +30,8 @@ export const EditTemplate: React.FC<{ spec: EditSpec; qa?: boolean }> = ({ spec,
     );
   };
   const indexed = spec.overlays.map((o, i) => ({ o, i }));
-  const fx = indexed.filter(({ o }) => isFootageFx(o));
+  // clips are footage: hidden in QA renders, like the footage itself
+  const fx = indexed.filter(({ o }) => isFootageFx(o) && !(qa && o.type === "clip"));
   const cards = indexed.filter(({ o }) => !isFootageFx(o) && !isFullScreen(o));
   const moments = indexed.filter(({ o }) => isFullScreen(o));
 
