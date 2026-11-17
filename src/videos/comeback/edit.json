@@ -487,11 +487,17 @@
       "role": "soft"
     },
     {
-      "text": "الـ boom",
+      "text": "الـ",
       "startMs": 32063,
-      "endMs": 32623,
-      "role": "default",
+      "endMs": 32343,
+      "role": "soft",
       "pageBreakAfter": true
+    },
+    {
+      "text": "boom",
+      "startMs": 32343,
+      "endMs": 32623,
+      "role": "default"
     },
     {
       "text": "ديال",
@@ -513,7 +519,7 @@
       "role": "default"
     },
     {
-      "text": "يeditي",
+      "text": "يمونطي",
       "startMs": 33983,
       "endMs": 34283,
       "role": "hero"
@@ -571,7 +577,7 @@
       "pageBreakAfter": true
     },
     {
-      "text": "نpostي",
+      "text": "نبوسطي",
       "startMs": 38133,
       "endMs": 38987,
       "role": "default"
@@ -832,7 +838,7 @@
       "role": "default"
     },
     {
-      "text": "كنeditي",
+      "text": "كنمونطي",
       "startMs": 58623,
       "endMs": 58743,
       "role": "hero",
@@ -947,7 +953,7 @@
       "pageBreakAfter": true
     },
     {
-      "text": "editيتو",
+      "text": "مونطيتو",
       "startMs": 65967,
       "endMs": 66485,
       "role": "default"
@@ -1042,12 +1048,6 @@
       "pageBreakAfter": true
     },
     {
-      "text": "like",
-      "startMs": 71346,
-      "endMs": 71766,
-      "role": "soft"
-    },
-    {
       "text": "عرفت",
       "startMs": 71766,
       "endMs": 72086,
@@ -1060,9 +1060,15 @@
       "role": "soft"
     },
     {
-      "text": "نpromptي",
+      "text": "نكتب",
       "startMs": 72306,
       "endMs": 72746,
+      "role": "soft"
+    },
+    {
+      "text": "prompt",
+      "startMs": 72746,
+      "endMs": 72826,
       "role": "hero",
       "pageBreakAfter": true
     },
@@ -1079,9 +1085,9 @@
       "role": "soft"
     },
     {
-      "text": "نconnectي",
+      "text": "نكونيكطي",
       "startMs": 73346,
-      "endMs": 73986,
+      "endMs": 73826,
       "role": "hero",
       "pageBreakAfter": true
     },
@@ -1258,7 +1264,7 @@
       "pageBreakAfter": true
     },
     {
-      "text": "كنuploadيه",
+      "text": "كنأبلوديه",
       "startMs": 88867,
       "endMs": 89897,
       "role": "hero",
@@ -1286,24 +1292,24 @@
     {
       "text": "بلا",
       "startMs": 91433,
-      "endMs": 91933,
+      "endMs": 92126,
       "role": "soft"
     },
     {
       "text": "ما",
-      "startMs": 91933,
-      "endMs": 92267,
+      "startMs": 92126,
+      "endMs": 92587,
       "role": "soft"
     },
     {
-      "text": "نsetupي",
-      "startMs": 92267,
-      "endMs": 93267,
+      "text": "نسطابي",
+      "startMs": 92587,
+      "endMs": 93805,
       "role": "default"
     },
     {
-      "text": "الـ PC",
-      "startMs": 93267,
+      "text": "PC",
+      "startMs": 93805,
       "endMs": 94267,
       "role": "hero",
       "pageBreakAfter": true
@@ -1311,24 +1317,24 @@
     {
       "text": "بلا",
       "startMs": 94287,
-      "endMs": 94527,
+      "endMs": 94607,
       "role": "soft"
     },
     {
       "text": "ما",
-      "startMs": 94527,
-      "endMs": 94687,
+      "startMs": 94607,
+      "endMs": 94820,
       "role": "soft"
     },
     {
       "text": "نحتاج",
-      "startMs": 94687,
-      "endMs": 95087,
+      "startMs": 94820,
+      "endMs": 95353,
       "role": "default"
     },
     {
-      "text": "الـ PC",
-      "startMs": 95087,
+      "text": "PC",
+      "startMs": 95353,
       "endMs": 95567,
       "role": "default",
       "pageBreakAfter": true
@@ -1507,26 +1513,26 @@
     },
     {
       "text": "ومن",
-      "startMs": 111752,
-      "endMs": 112012,
+      "startMs": 109373,
+      "endMs": 109600,
       "role": "soft"
     },
     {
       "text": "بعد",
-      "startMs": 112012,
-      "endMs": 112092,
+      "startMs": 109600,
+      "endMs": 110072,
       "role": "soft"
     },
     {
-      "text": "كنcheckي",
-      "startMs": 112012,
-      "endMs": 112072,
+      "text": "كنشيكي",
+      "startMs": 110072,
+      "endMs": 110892,
       "role": "hero",
       "pageBreakAfter": true
     },
     {
       "text": "the outcome",
-      "startMs": 112012,
+      "startMs": 111493,
       "endMs": 112253,
       "role": "default",
       "pageBreakAfter": true
@@ -1571,9 +1577,9 @@
       "role": "soft"
     },
     {
-      "text": "نpostيه",
+      "text": "نبوسطيه",
       "startMs": 115650,
-      "endMs": 116260,
+      "endMs": 116150,
       "role": "hero",
       "pageBreakAfter": true
     },
